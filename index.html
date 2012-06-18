@@ -1,315 +1,373 @@
-<!doctype html>  
+<!doctype html>
 <html lang="en">
-	
-	<head>
-		<meta charset="utf-8">
-		
-		<title>reveal.js</title>
 
-		<meta name="description" content="An easy to use CSS 3D slideshow tool for quickly creating good looking HTML presentations.">
-		<meta name="author" content="Hakim El Hattab">
+<head>
+    <meta charset="utf-8">
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-		
-		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-		
-		<link rel="stylesheet" href="css/reset.css">
-		<link rel="stylesheet" href="css/main.css">
-		<link rel="stylesheet" href="css/print.css" type="text/css" media="print">
+    <title>Continuous Delivery on the Cloud</title>
 
-		<link rel="stylesheet" href="lib/zenburn.css">
-	</head>
-	
-	<body>
-		
-		<div class="reveal">
+    <meta name="description" content="">
+    <meta name="author" content="James Ward">
 
-			<!-- Used to fade in a background when a specific slide state is reached -->
-			<div class="state-background"></div>
-			
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
-				<section>
-					<h1>Reveal.js</h1>
-					<h3 class="inverted">CSS 3D Presentations</h3>
-					<script>
-						// Delicously hacky. Look away.
-						if( navigator.userAgent.match( /(iPhone|iPad|iPod|Android)/i ) ) document.write( '<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>' );
-					</script>
-				</section>
-				
-				<section>
-					<h2>Heads Up</h2>
-					<p>
-						reveal.js is an easy to use, HTML based, presentation tool. You'll need a modern browser with 
-						support for CSS 3D transforms to see it in its full glory.
-					</p>
-					<p>
-						<i><small>- <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small></i>
-					</p>
-				</section>
-				
-				<!-- Example of nested vertical slides -->
-				<section>
-					<section>
-						<h2>Vertical Slides</h2>
-						<p>
-							Slides can be nested inside of other slides,<br/>
-							try pressing <a href="#/2/1">down</a>.
-						</p>
-						<a href="#/2/1" class="image">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png">
-						</a>
-					</section>
-					<section>
-						<h2>Basement Level 1</h2>
-						<p>Press down or up to navigate.</p>
-					</section>
-					<section>
-						<h2>Basement Level 2</h2>
-						<p>Cornify</p>
-						<a class="test" href="http://cornify.com">
-							<img width="280" height="326" src="https://s3.amazonaws.com/hakim-static/reveal-js/cornify.gif">
-						</a>
-					</section>
-					<section>
-						<h2>Basement Level 3</h2>
-						<p>That's it, time to go back up.</p>
-						<a href="#/2" class="image">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" style="-webkit-transform: rotate(180deg);">
-						</a>
-					</section>
-				</section>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-				<section>
-					<h2>Holistic Overview</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview!
-					</p>
-				</section>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
-				<section>
-					<h2>Works in Mobile Safari</h2>
-					<p>
-						Try it out! You can swipe through the slides pinch your way to the overview.
-					</p>
-				</section>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/print.css" type="text/css" media="print">
 
-				<section>
-					<h2>Transition Styles</h2>
-					<p>
-						You can select from different transitions, like:
-					</p>
-					<ul>
-						<li><a href="http://lab.hakim.se/reveal-js/?transition=cube">Cube</a></li>
-						<li><a href="http://lab.hakim.se/reveal-js/?transition=page">Page</a></li>
-						<li><a href="http://lab.hakim.se/reveal-js/?transition=concave">Concave</a></li>
-						<li><a href="http://lab.hakim.se/reveal-js/?transition=linear">Linear</a></li>
-					</ul>
-				</section>
+    <link rel="stylesheet" href="lib/zenburn.css">
+    <style>
+        .column2 {
+            column-width: 300px;
+            -webkit-column-width: 300px;
+            -moz-column-width: 300px;
+            column-count: 2;
+            -webkit-column-count: 2;
+            -moz-column-count: 2;
+            column-gap: 50px;
+            -webkit-column-gap: 50px;
+            -moz-column-gap: 50px;
+        }
+    </style>
+</head>
 
-				<section>
-					<h2>Marvelous Unordered List</h2>
-					<ul>
-						<li>No order here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-					</ul>
-				</section>
-				
-				<section>
-					<h2>Fantastic Ordered List</h2>
-					<ol>
-						<li>One is smaller than...</li>
-						<li>Two is smaller than...</li>
-						<li>Three!</li>
-					</ol>
-				</section>
+<body>
 
-				<section>
-					<section data-state="alert">
-						<h2>Global State</h2>
-						<p>
-							Set <code>data-state="something"</code> on a slide and <code>"something"</code>
-							will be added as a class to the document element when the slide is open. This let's you
-							apply broader style changes, like switching the background.
-						</p>
-						<a href="#/7/1" class="image">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png">
-						</a>
-					</section>
-					<section data-state="blackout">
-						<h2>"blackout"</h2>
-						<a href="#/7/2" class="image">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png">
-						</a>
-					</section>
-					<section data-state="soothe">
-						<h2>"soothe"</h2>
-						<a href="#/7/0" class="image">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" style="-webkit-transform: rotate(180deg);">
-						</a>
-					</section>
-				</section>
+<div class="reveal">
 
-				<section data-state="customevent">
-					<h2>Custom Events</h2>
-					<p>
-						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-					</p>
-					<pre><code contenteditable style="font-size: 18px; margin-top: 20px;">Reveal.addEventListener( 'customevent', function() {
-	alert( '"customevent" has fired' );
-} );
-					</code></pre>
-				</section>
+<!-- Used to fade in a background when a specific slide state is reached -->
+<div class="state-background"></div>
 
-				<section>
-					<h2>Clever Quotes</h2>
-					<p>
-						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						The nice thing about standards is that there are so many to choose from</q> and block:
-					</p>
-					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						For years there has been a theory that millions of monkeys typing at random on millions of typewriters would 
-						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.
-					</blockquote>
-				</section>
-				
-				<section>
-					<h2>Pretty Code</h2>
-					<pre><code contenteditable>
-var supports3DTransforms =  document.body.style['webkitPerspective'] !== undefined || 
-				document.body.style['MozPerspective'] !== undefined ||
-				document.body.style['perspective'] !== undefined;
+<!-- Any section element inside of this container is displayed as a slide -->
+<div class="slides">
+<section>
+    <h1>Continuous Delivery on the Cloud</h1>
+    <h3 class="inverted"><a href="http://twitter.com/_JamesWard">@_JamesWard</a></h3>
+    <script>
+        // Delicously hacky. Look away.
+        if( navigator.userAgent.match( /(iPhone|iPad|iPod|Android)/i ) ) document.write( '<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>' );
+    </script>
+</section>
+<section>
+    <h2>Continuous Delivery</h2>
+    <a href="http://en.wikipedia.org/wiki/Continuous_delivery"><img src="assets/Continuous_Delivery_process_diagram.png"></a><br/>
+    <h3>Deliver Faster &amp; Reduce Risk</h3>
+</section>
+<section>
+    <section>
+        <h2>Heroku</h2>
+        <h3 class="inverted">Cloud Application Platform</h3>
+        <!-- todo: logos -->
+        <h3>1,871,268+ Apps Running on Heroku</h3>
+    </section>
+    <section>
+        <h2>Heroku Terminology</h2>
+        <!-- todo: diagram -->
+    </section>
+</section>
+<section>
+    <section>
+        <h1>Play Framework</h1>
+    </section>
+    <section>
+        <blockquote>Play is based on a lightweight, stateless, web-friendly architecture and features predictable and minimal resource consumption (CPU, memory, threads) for highly-scalable applications - thanks to its reactive model, based on Iteratee IO.</blockquote>
+    </section>
+    <section>
+        <blockquote><span style="opacity: 0">Play is based on a</span> lightweight, stateless, web-friendly<span style="opacity: 0"> architecture and features predictable and minimal resource consumption (CPU, memory, threads)</span> for highly-scalable applications<span style="opacity: 0"> - thanks to its reactive model, based on Iteratee IO.</span></blockquote>
+    </section>
+    <section>
+        <h2>My Top 10 Favorite Features</h2>
+        <ul style="list-style-type: none;">
+            <li>0) Simple</li>
+            <li>1) URL Routing</li>
+            <li>2) Class Reloading</li>
+            <li>3) Share-Nothing</li>
+            <li>4) Java &amp; Scala Support</li>
+            <li>5) Great Testing Support</li>
+            <li>6) JPA/EBean Support</li>
+            <li>7) NIO Server (Netty)</li>
+            <li>8) Asset Compiler</li>
+            <li>9) Instant Deployment on Heroku</li>
+        </ul>
+    </section>
+    <section>
+        <h2>Create a new Play App</h2>
+        <br/>
+        <pre><code>$ play new foo</code></pre>
+    </section>
+</section>
+<section>
+    <section>
+        <h2>Git Everything</h2>
+        <h3 class="inverted">Consistency Between Environments</h3>
+        <br/>
+        <ul>
+            <li>Everything needed is defined &amp resolvable</li>
+            <li>Environments only differ through configuration</li>
+            <li>Litmus Test: <blockquote>Does getting a new developer setup take more than 15 minutes?</blockquote></li>
+        </ul>
+        <br/>
+        <br/>
+        <blockquote><span style="text-decoration: line-through">It works on my machine.</span></blockquote>
+    </section>
+    <section>
+        <h2>Running on Heroku</h2>
+        <br/>
+        <pre><code>$ git init
+$ git add .
+$ git commit -m init
+$ heroku create -s cedar
+$ git push heroku master</code></pre>
+    </section>
+</section>
+<section>
+    <section>
+        <h2>The Road to Production is One Way</h2>
+        <h3 class="inverted">Code / Deploy Correlation</h3>
+        <br/>
+        <ul>
+            <li>Production changes requires source changes</li>
+            <li>Correlation between code and running systems</li>
+            <li>Branching in git for different environments</li>
+            <li>Litmus Test: <blockquote>Can I SSH in and make a change?</blockquote></li>
+        </ul>
+    </section>
+    <section>
+        <h2>Heroku Releases</h2>
+        <br/>
+        <pre><code>$ # make a change
+$ git commit -am "a change"
+$ git push heroku master</code></pre>
+        <br/>
+        <pre><code>$ heroku releases
+$ git log
+$ heroku rollback</code></pre>
+    </section>
+    <section>
+        <h2>Staging Environments</h2>
+        <br/>
+        <pre><code>$ git checkout -b newfeature
+$ # make a change
+$ git commit -am "new feature"
+$ git remote rename heroku prod
+$ heroku create -s cedar
+$ git remote rename heroku staging
+$ git remote -v
+$ git push staging newfeature:master</code></pre>
+    </section>
+</section>
+<section>
+    <section>
+        <h2>The Environment Provides the Config</h2>
+        <h3 class="inverted">Zero Intervention On Deploy</h3>
+        <br/>
+        <ul>
+            <li>Each environment owns their config</li>
+            <li>Litmus Test: <blockquote>Are there any credentials stored in the source repo?</blockquote></li>
+        </ul>
+    </section>
+    <section>
+        <h2>Heroku Config</h2>
+        <br/>
+        <pre><code>$ heroku config:add FOO=bar
+$ heroku config
+$ # use System.getenv("FOO")
+$ git commit -am "add FOO use"
+$ git push prod master</code></pre>
+    </section>
+    <section>
+        <h2>External Resources Own Their Config</h2>
+        <br/>
+        <pre><code>$ heroku addons:add heroku-postgresql:dev
+$ heroku pg:promote HEROKU_POSTGRESQL_BROWN
+$ heroku config</code></pre>
+    </section>
+</section>
+<section>
+    <section>
+        <h2>Schema Migrations</h2>
+        <h3 class="inverted">Manage Schema Changes Code Changes</h3>
+        <br/>
+        <ul>
+            <li>Versioned, Roll-Backable, etc</li>
+            <li>2 Phase Migrations: First DB then Code</li>
+            <li>Litmus Test: <blockquote>Do schema changes and code changes happen at the same time?</blockquote></li>
+        </ul>
+    </section>
+    <section>
+        <ul>
+            <li>Add Dependency:<pre><code>"postgresql" % "postgresql" % "9.1-901-1.jdbc4"</code></pre></li>
+            <li>Update conf/application.conf:<pre><code>db.default.driver=org.postgresql.Driver
+db.default.url=${?DATABASE_URL}
+ebean.default="models.*"
+applyEvolutions.default=true</code></pre></li>
+            <li>Create local Postgres Database:<pre><code>$ sudo -u postgres createuser -P f
+$ createdb -U f -W -h localhost f
+$ export DATABASE_URL=postgres://f:f@localhost/f</code></pre></li>
+            <li>Create Model</li>
+            <li>Load App</li>
+            <li>Deploy App</li>
+        </ul>
+    </section>
+    <section>
+        <ul>
+            <li>Turn off auto-schema generation</li>
+            <li>Make schema change: <pre><code># --- !Ups
+alter table bar add column rating number;
 
-function linkify( selector ) {
-    if( supports3DTransforms ) {
-        
-        var nodes = document.querySelectorAll( selector );
+# --- !Downs
+alter table bar delete column rating;</code></pre></li>
+            <li>Deploy &amp; Run</li>
+            <li>Update Bar.java: <pre><code>public Integer rating;</code></pre></li>
+            <li>Deploy &amp; Run</li>
+        </ul>
+    </section>
+</section>
+<section>
+    <section>
+        <h2>Ephemeral Web Tier</h2>
+        <h3 class="inverted">Instant Scalability &amp; Deployment</h3>
+        <br/>
+        <ul>
+            <li>Local disk and memory are not persistent stores</li>
+            <li>Server affinity prevents Continuous Delivery</li>
+            <li>All persistent state is external to the app tier</li>
+            <li>Litmus Test: <blockquote>Does a <a href="http://techblog.netflix.com/2011/07/netflix-simian-army.html">Chaos Monkey</a> cause chaos?</blockquote></li>
+        </ul>
+    </section>
+    <section>
+        <h2>Scaling on Heroku</h2>
+        <br/>
+        <pre><code>$ heroku scale web=50
+$ heroku ps</code></pre>
+    </section>
+    <section>
+        <h2>Stateless Web Tier</h2>
+        <br/>
+        <ul>
+            <li>Add Session to App</li>
+            <li>Deploy &amp; Run</li>
+            <li>Consistency Across Instances</li>
+            <li>Restart Instances</li>
+        </ul>
+    </section>
+</section>
+<section>
+    <section>
+        <h2>Logging</h2>
+        <h3 class="inverted">Logs as Streams</h3>
+        <br/>
+        <ul>
+            <li>Externalize &amp; Centralize Logging</li>
+            <li>One place to search</li>
+            <li>Log rotation and disk filling are barriers</li>
+            <li>Litmus Test: <blockquote>Are logs written to local disk?</blockquote></li>
+        </ul>
+    </section>
+    <section>
+        <h2>Logging on Heroku</h2>
+        <br/>
+        <ul>
+            <li>All STDOUT, Router Logs, Buildpack Logs goes to Logplex</li>
+            <li>View the logs for an app: <pre><code>$ heroku logs</code></pre></li>
+            <li>Tail the logs for an app: <pre><code>$ heroku logs -t</code></pre></li>
+        </ul>
+        <br/>
+        <br/>
+        <h3>Logging Add-ons</h3>
+        <pre><code>$ heroku addons:add papertrail
+$ heroku addons:open papertrail</code></pre>
+    </section>
+</section>
+<section>
+    <section>
+        <h2>Continuous Integration &amp; Delivery</h2>
+        <h3 class="inverted">Better Quality</h3>
+        <br/>
+        <ul>
+            <li>Require testing between push and deploy</li>
+            <li>Automatic deploy when tests are successful</li>
+            <li>Litmus Test: <blockquote>Is manual intervention required to test and deploy?</blockquote></li>
+        </ul>
+    </section>
+</section>
+<section>
+    <h2>Further Learning</h2>
+    <br/>
+    <ul>
+        <li><h2><a href="http://www.12factor.net/">The Twelve Factor App</a></h2></li>
+        <li><h2><a href="http://java.heroku.com/">Get Started with Java on Heroku</a></h2></li>
+    </ul>
+</section>
+</div>
 
-        for( var i = 0, len = nodes.length; i < len; i++ ) {
-            var node = nodes[i];
+<!-- The navigational controls UI -->
+<aside class="controls">
+    <a class="left" href="#">&#x25C4;</a>
+    <a class="right" href="#">&#x25BA;</a>
+    <a class="up" href="#">&#x25B2;</a>
+    <a class="down" href="#">&#x25BC;</a>
+</aside>
 
-            if( !node.className || !node.className.match( /roll/g ) ) {
-                node.className += ' roll';
-                node.innerHTML = '<span data-title="'+ node.text +'">' + node.innerHTML + '</span>';
-            }
-        };
-    }
-}
+<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+<div class="progress"><span></span></div>
 
-linkify( 'a' );
-					</code></pre>
-					<p>Courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
-				</section>
-				
-				<section>
-					<h2>Intergalactic Interconnections</h2>
-					<p>
-						You can link between slides internally,<br/>
-						<a href="#/2/3">like this</a>.
-					</p>
-				</section>
+</div>
 
-				<section>
-					<h2>Fragmented Views</h2>
-					<p>Hit the next arrow...</p>
-					<p class="fragment">... to step through ...</p>
-					<ol>
-						<li class="fragment"><code>any type</code></li>
-						<li class="fragment"><em>of view</em></li>
-						<li class="fragment"><strong>fragments</strong></li>
-					</ol>
-				</section>
-				
-				<section>
-					<h2>Spectacular image!</h2>
-					<a class="image" href="http://hakim.se/experiments/html5/breakdom/" target="_blank">
-						<img width="320" height="412" src="https://s3.amazonaws.com/hakim-static/reveal-js/breakdom.png">
-					</a>
-				</section>
-				
-				<section>
-					<h2>Stellar Links</h2>
-					<ul>
-						<li><a href="https://github.com/hakimel/reveal.js">Source code on github</a></li>
-						<li><a href="http://hakim.se/projects/reveal-js">Read more on my site</a></li>
-						<li><a href="http://twitter.com/hakimel">Follow me on Twitter</a></li>
-					</ul>
-				</section>
-				
-				<section>
-					<h1>THE END</h1>
-					<h3 class="inverted">BY Hakim El Hattab / hakim.se</h3>
-				</section>
-			</div>
+<!-- Optional libraries for code syntax highlighting and classList support in IE9 -->
+<script src="lib/highlight.js"></script>
+<script src="lib/classList.js"></script>
 
-			<!-- The navigational controls UI -->
-			<aside class="controls">
-				<a class="left" href="#">&#x25C4;</a>
-				<a class="right" href="#">&#x25BA;</a>
-				<a class="up" href="#">&#x25B2;</a>
-				<a class="down" href="#">&#x25BC;</a>
-			</aside>
+<script src="js/reveal.min.js"></script>
 
-			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
-			<div class="progress"><span></span></div>
-			
-		</div>
+<script>
+    // Parse the query string into a key/value object
+    var query = {};
+    location.search.replace( /[A-Z0-9]+?=(\w*)/gi, function(a) {
+        query[ a.split( '=' ).shift() ] = a.split( '=' ).pop();
+    } );
 
-		<!-- Optional libraries for code syntax highlighting and classList support in IE9 -->
-		<script src="lib/highlight.js"></script>
-		<script src="lib/classList.js"></script>
-		
-		<script src="js/reveal.js"></script>
-		
-		<script>
-			// Parse the query string into a key/value object
-			var query = {};
-			location.search.replace( /[A-Z0-9]+?=(\w*)/gi, function(a) {
-				query[ a.split( '=' ).shift() ] = a.split( '=' ).pop();
-			} );
+    // Fires when a slide with data-state=customevent is activated
+    Reveal.addEventListener( 'customevent', function() {
+        alert( '"customevent" has fired' );
+    } );
 
-			// Fires when a slide with data-state=customevent is activated
-			Reveal.addEventListener( 'customevent', function() {
-				alert( '"customevent" has fired' );
-			} );
+    // Fires each time a new slide is activated
+    Reveal.addEventListener( 'slidechanged', function( event ) {
+        // event.previousSlide, event.currentSlide, event.indexh, event.indexv
+    } );
 
-			// Fires each time a new slide is activated
-			Reveal.addEventListener( 'slidechanged', function( event ) {
-				// event.previousSlide, event.currentSlide, event.indexh, event.indexv
-			} );
+    Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
 
-			Reveal.initialize({
-				// Display controls in the bottom right corner
-				controls: true,
+        // Display a presentation progress bar
+        progress: true,
 
-				// Display a presentation progress bar
-				progress: true,
+        // If true; each slide will be pushed to the browser history
+        history: true,
 
-				// If true; each slide will be pushed to the browser history
-				history: true,
+        // Loops the presentation, defaults to false
+        loop: false,
 
-				// Loops the presentation, defaults to false
-				loop: false,
+        // Flags if mouse wheel navigation should be enabled
+        mouseWheel: true,
 
-				// Flags if mouse wheel navigation should be enabled
-				mouseWheel: true,
+        // Apply a 3D roll to links on hover
+        rollingLinks: false,
 
-				// Apply a 3D roll to links on hover
-				rollingLinks: true,
+        // UI style
+        theme: query.theme || 'default', // default/neon
 
-				// UI style
-				theme: query.theme || 'default', // default/neon
+        // Transition style
+        transition: query.transition || 'default' // default/cube/page/concave/linear(2d)
+    });
 
-				// Transition style
-				transition: query.transition || 'default' // default/cube/page/concave/linear(2d)
-			});
+    hljs.initHighlightingOnLoad();
+</script>
 
-			hljs.initHighlightingOnLoad();
-		</script>
-
-	</body>
+</body>
 </html>
