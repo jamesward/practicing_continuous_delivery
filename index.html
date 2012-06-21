@@ -74,7 +74,6 @@
     </section>
     <section>
         <h2>Heroku Terminology</h2>
-        <br/>
         <img src="assets/heroku_terms.png" style="width: 100%">
     </section>
 </section>
@@ -131,7 +130,7 @@
         <pre><code>$ git init
 $ git add .
 $ git commit -m init
-$ heroku create -s cedar
+$ heroku create
 $ git push heroku master</code></pre>
     </section>
 </section>
@@ -165,7 +164,7 @@ $ heroku rollback</code></pre>
 $ # make a change
 $ git commit -am "new feature"
 $ git remote rename heroku prod
-$ heroku create -s cedar
+$ heroku create
 $ git remote rename heroku staging
 $ git remote -v
 $ git push staging newfeature:master</code></pre>
@@ -175,7 +174,6 @@ $ git push staging newfeature:master</code></pre>
     <section>
         <h2>The Environment Provides the Config</h2>
         <h3 class="inverted">Zero Intervention On Deploy</h3>
-        <br/>
         <ul>
             <li>Each environment owns their config</li>
             <li>Litmus Test: <blockquote>Are there any credentials stored in the source repo?</blockquote></li>
@@ -201,7 +199,7 @@ $ heroku config</code></pre>
 <section>
     <section>
         <h2>Schema Migrations</h2>
-        <h3 class="inverted">Manage Schema Changes Code Changes</h3>
+        <h3 class="inverted">Manage Schema Changes like Code Changes</h3>
         <br/>
         <ul>
             <li>Versioned, Roll-Backable, etc</li>
@@ -228,7 +226,7 @@ $ export DATABASE_URL=postgres://f:f@localhost/f</code></pre></li>
         <ul>
             <li>Turn off auto-schema generation</li>
             <li>Make schema change: <pre><code># --- !Ups
-alter table bar add column rating number;
+alter table bar add column rating integer;
 
 # --- !Downs
 alter table bar delete column rating;</code></pre></li>
@@ -268,7 +266,6 @@ $ heroku ps</code></pre>
     </section>
     <section>
         <h2>Zero-Error Change-Over</h2>
-        <br/>
         <img src="assets/cd_heroku.png" style="width: 100%">
     </section>
 </section>
