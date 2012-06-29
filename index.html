@@ -52,6 +52,22 @@
     </script>
 </section>
 <section>
+    <h2>Agenda</h2>
+    <ol>
+        <li><a href="#/2">Continuous Delivery</a></li>
+        <li><a href="#/3">Heroku</a></li>
+        <li><a href="#/4">Play Framework</a></li>
+        <li><a href="#/5">Multiple Environments</a></li>
+        <li><a href="#/6">Deploying Code Changes</a></li>
+        <li><a href="#/7">Config</a></li>
+        <li><a href="#/8">Deploying Schema Changes</a></li>
+        <li><a href="#/9">State Goes Somewhere</a></li>
+        <li><a href="#/10">Logging</a></li>
+        <li><a href="#/11">Monitoring</a></li>
+        <li><a href="#/12">Deployment Process</a></li>
+    </ol>
+</section>
+<section>
     <h2>Continuous Delivery</h2>
     <a href="http://en.wikipedia.org/wiki/Continuous_delivery"><img src="assets/Continuous_Delivery_process_diagram.png"></a><br/>
     <h3>Deliver Faster &amp; Reduce Risk</h3>
@@ -289,24 +305,51 @@ $ heroku ps</code></pre>
             <li>View the logs for an app: <pre><code>$ heroku logs</code></pre></li>
             <li>Tail the logs for an app: <pre><code>$ heroku logs -t</code></pre></li>
         </ul>
-        <br/>
-        <br/>
-        <h3>Logging Add-ons</h3>
-        <pre><code>$ heroku addons:add papertrail
-$ heroku addons:open papertrail</code></pre>
     </section>
 </section>
 <section>
     <section>
-        <h2>Continuous Integration &amp; Delivery</h2>
-        <h3 class="inverted">Better Quality</h3>
+        <h2>Monitoring</h2>
+        <h3 class="inverted">Know When Things Break</h3>
         <br/>
         <ul>
-            <li>Require testing between push and deploy</li>
-            <li>Automatic deploy when tests are successful</li>
-            <li>Litmus Test: <blockquote>Is manual intervention required to test and deploy?</blockquote></li>
+            <li>Service Checks</li>
+            <li>Log Monitoring</li>
+            <li>Performance Monitoring</li>
+            <li>Litmus Test: <blockquote>Do your users know before you when something goes wrong?</blockquote></li>
         </ul>
     </section>
+    <section>
+        <h2>Service Checks</h2>
+        <br/>
+        <ul>
+            <li><a href="http://pingdom.com">Pingdom</a></li>
+        </ul>
+    </section>
+    <section>
+        <h2>Log Monitoring</h2>
+        <br/>
+        <h3 class="inverted">Papertrail</h3>
+        <pre><code>$ heroku addons:add papertrail
+$ heroku addons:open papertrail</code></pre>
+    </section>
+    <section>
+        <h2>Performance Monitoring</h2>
+        <br/>
+        <h3 class="inverted">New Relic</h3>
+        <pre><code>$ heroku addons:add newrelic
+$ heroku addons:open newrelic</code></pre>
+    </section>
+</section>
+<section>
+    <h2>Continuous Integration &amp; Delivery</h2>
+    <h3 class="inverted">Better Quality</h3>
+    <br/>
+    <ul>
+        <li>Require testing between push and deploy</li>
+        <li>Automatic deploy when tests are successful</li>
+        <li>Litmus Test: <blockquote>Is manual intervention required to test and deploy?</blockquote></li>
+    </ul>
 </section>
 <section>
     <h2>Further Learning</h2>
