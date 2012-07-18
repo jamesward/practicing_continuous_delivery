@@ -55,38 +55,35 @@
     <h2>Agenda</h2>
     <ol>
         <li><a href="#/2">Continuous Delivery</a></li>
-        <li><a href="#/4">Intro: Play Framework</a></li>
-        <li><a href="#/3">Intro: Heroku</a></li>
+        <li><a href="#/3">Intro: Play Framework</a></li>
+        <li><a href="#/4">Intro: Heroku</a></li>
         <li><a href="#/5">Practice: Micro Apps</a></li>
-        <li><a href="#/5">Practice: Checkout, Build, Run</a></li>
-        <li><a href="#/6">Practice: One Way Deployment</a></li>
-        <li><a href="#/7">Practice: Zero Intervention Deployment</a></li>
-        <li><a href="#/8">Practice: Isolated Schema Changes</a></li>
-        <li><a href="#/9">Practice: Ephemeral App Tier</a></li>
-        <li><a href="#/10">Practice: Logs as Streams</a></li>
-        <li><a href="#/11">Practice: Monitor &amp; Notify</a></li>
+        <li><a href="#/6">Practice: Checkout, Build, Run</a></li>
+        <li><a href="#/7">Practice: One Way Deployment</a></li>
+        <li><a href="#/8">Practice: Zero Intervention Deployment</a></li>
+        <li><a href="#/9">Practice: Isolated Schema Changes</a></li>
+        <li><a href="#/10">Practice: Ephemeral App Tier</a></li>
+        <li><a href="#/11">Practice: Logs as Streams</a></li>
+        <li><a href="#/12">Practice: Monitor &amp; Notify</a></li>
     </ol>
 </section>
 <section>
     <section>
         <h2>Continuous Delivery</h2>
         <a href="http://en.wikipedia.org/wiki/Continuous_delivery"><img src="assets/Continuous_Delivery_process_diagram.png"></a><br/>
-        <h3>Deliver Faster &amp; Reduce Risk</h3>
+        <h3>Goals: Deliver Faster &amp; Reduce Risk</h3>
     </section>
     <section>
-        <h2>Continuous Integration &amp; Delivery</h2>
-        <h3 class="inverted">Better Quality</h3>
+        <h3 class="inverted">Adjustable Process</h3>
         <br/>
         <ul>
-            <li>Require testing between push and deploy</li>
-            <li>Automatic deploy when tests are successful</li>
-            <li>Litmus Test: <blockquote>Is manual intervention required to test and deploy?</blockquote></li>
+            <li>Least involved: Deploy direct to production</li>
+            <li>Most involved: Check into SCM, run CI, user acceptance tests, then deploy to staging</li>
         </ul>
     </section>
     <section>
-        <h2>Implementing Continuous Delivery</h2>
+        <h3 class="inverted">Continuous Delivery at Heroku</h3>
         <br/>
-        <h3 class="inverted">At Heroku:</h3>
         <ul>
             <li>4000+ Heroku apps on Heroku</li>
             <li>500+ releases a day</li>
@@ -169,7 +166,7 @@ $ git commit -m init</code></pre>
         <h2>Practice: Micro Apps</h2>
         <br/>
         <h3 class="inverted">Barrier: Monolithic Apps</h3>
-        <h3 class="inverted"><blockquote>Does app startup take more than 1 minute?</blockquote></h3>
+        <h3 class="inverted"><blockquote style="width: 100%">Does app startup take more than 1 minute?</blockquote></h3>
         <br/>
         <ul>
             <li>Decouple through APIs (HTTP, Pub/Sub, etc)</li>
