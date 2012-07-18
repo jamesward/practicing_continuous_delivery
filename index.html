@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Continuous Delivery on the Cloud</title>
+    <title>Practicing Continuous Delivery</title>
 
     <meta name="description" content="">
     <meta name="author" content="James Ward">
@@ -44,7 +44,7 @@
 <!-- Any section element inside of this container is displayed as a slide -->
 <div class="slides">
 <section>
-    <h1>Continuous Delivery on the Cloud</h1>
+    <h1>Practicing Continuous Delivery</h1>
     <h3 class="inverted"><a href="http://twitter.com/_JamesWard">@_JamesWard</a></h3>
     <script>
         // Delicously hacky. Look away.
@@ -55,42 +55,45 @@
     <h2>Agenda</h2>
     <ol>
         <li><a href="#/2">Continuous Delivery</a></li>
-        <li><a href="#/3">Heroku</a></li>
-        <li><a href="#/4">Play Framework</a></li>
-        <li><a href="#/5">Multiple Environments</a></li>
-        <li><a href="#/6">Deploying Code Changes</a></li>
-        <li><a href="#/7">Config</a></li>
-        <li><a href="#/8">Deploying Schema Changes</a></li>
-        <li><a href="#/9">State Goes Somewhere</a></li>
-        <li><a href="#/10">Logging</a></li>
-        <li><a href="#/11">Monitoring</a></li>
-        <li><a href="#/12">Deployment Process</a></li>
+        <li><a href="#/4">Intro: Play Framework</a></li>
+        <li><a href="#/3">Intro: Heroku</a></li>
+        <li><a href="#/5">Practice: Micro Apps</a></li>
+        <li><a href="#/5">Practice: Checkout, Build, Run</a></li>
+        <li><a href="#/6">Practice: One Way Deployment</a></li>
+        <li><a href="#/7">Practice: Zero Intervention Deployment</a></li>
+        <li><a href="#/8">Practice: Isolated Schema Changes</a></li>
+        <li><a href="#/9">Practice: Ephemeral App Tier</a></li>
+        <li><a href="#/10">Practice: Logs as Streams</a></li>
+        <li><a href="#/11">Practice: Monitor &amp; Notify</a></li>
     </ol>
 </section>
 <section>
-    <h2>Continuous Delivery</h2>
-    <a href="http://en.wikipedia.org/wiki/Continuous_delivery"><img src="assets/Continuous_Delivery_process_diagram.png"></a><br/>
-    <h3>Deliver Faster &amp; Reduce Risk</h3>
-</section>
-<section>
     <section>
-        <h1>Heroku</h1>
-        <h3 class="inverted">Cloud Application Platform</h3>
-        <img src="assets/ruby.png" style="height: 70px; border: 0px;">
-        <img src="assets/python.png" style="height: 70px; border: 0px; background-color: #cccccc;">
-        <img src="assets/nodejs.png" style="height: 70px; border: 0px;">
-        <br/>
-        <img src="assets/java.png" style="width: 50px; border: 0px; background-color: #eeeeee; padding: 10px;">
-        <img src="assets/play.png" style="height: 50px; border: 0px; background-color: #eeeeee; padding: 10px;">
-        <img src="assets/clojure.png" style="height: 50px; border: 0px; background-color: #eeeeee; padding: 10px;">
-        <img src="assets/scala.png" style="height: 50px; border: 0px; background-color: #eeeeee; padding: 10px;">
-        <br/>
-        <br/>
-        <h3>1,871,268+ Apps Running on Heroku</h3>
+        <h2>Continuous Delivery</h2>
+        <a href="http://en.wikipedia.org/wiki/Continuous_delivery"><img src="assets/Continuous_Delivery_process_diagram.png"></a><br/>
+        <h3>Deliver Faster &amp; Reduce Risk</h3>
     </section>
     <section>
-        <h2>Heroku Terminology</h2>
-        <img src="assets/heroku_terms.png" style="width: 100%">
+        <h2>Continuous Integration &amp; Delivery</h2>
+        <h3 class="inverted">Better Quality</h3>
+        <br/>
+        <ul>
+            <li>Require testing between push and deploy</li>
+            <li>Automatic deploy when tests are successful</li>
+            <li>Litmus Test: <blockquote>Is manual intervention required to test and deploy?</blockquote></li>
+        </ul>
+    </section>
+    <section>
+        <h2>Implementing Continuous Delivery</h2>
+        <br/>
+        <h3 class="inverted">At Heroku:</h3>
+        <ul>
+            <li>4000+ Heroku apps on Heroku</li>
+            <li>500+ releases a day</li>
+            <li>200+ deploys a day</li>
+            <li>85 people</li>
+            <li>21 teams</li>
+        </ul>
     </section>
 </section>
 <section>
@@ -128,150 +131,262 @@
 </section>
 <section>
     <section>
-        <h2>Git Everything</h2>
-        <h3 class="inverted">Consistency Between Environments</h3>
+        <h1>Heroku</h1>
+        <h3 class="inverted">Cloud Application Platform</h3>
+        <img src="assets/ruby.png" style="height: 70px; border: 0px;">
+        <img src="assets/python.png" style="height: 70px; border: 0px; background-color: #cccccc;">
+        <img src="assets/nodejs.png" style="height: 70px; border: 0px;">
         <br/>
-        <ul>
-            <li>Everything needed is defined &amp resolvable</li>
-            <li>Environments only differ through configuration</li>
-            <li>Litmus Test: <blockquote>Does getting a new developer setup take more than 15 minutes?</blockquote></li>
-        </ul>
+        <img src="assets/java.png" style="width: 50px; border: 0px; background-color: #eeeeee; padding: 10px;">
+        <img src="assets/play.png" style="height: 50px; border: 0px; background-color: #eeeeee; padding: 10px;">
+        <img src="assets/clojure.png" style="height: 50px; border: 0px; background-color: #eeeeee; padding: 10px;">
+        <img src="assets/scala.png" style="height: 50px; border: 0px; background-color: #eeeeee; padding: 10px;">
         <br/>
         <br/>
-        <blockquote><span style="text-decoration: line-through">It works on my machine.</span></blockquote>
+        <h3>1,871,268+ Apps Running on Heroku</h3>
     </section>
     <section>
-        <h2>Running on Heroku</h2>
+        <h2>Heroku Terminology</h2>
+        <img src="assets/heroku_terms.png" style="width: 100%">
+    </section>
+    <section>
+        <h2>Deploying on Heroku</h2>
         <br/>
+        <h3 class="inverted">Git Repo</h3>
         <pre><code>$ git init
 $ git add .
-$ git commit -m init
-$ heroku create
-$ git push heroku master</code></pre>
+$ git commit -m init</code></pre>
+        <br/>
+        <h3 class="inverted">Provision an App</h3>
+        <pre><code>$ heroku create</code></pre>
+        <br/>
+        <h3 class="inverted">Deploy</h3>
+        <pre><code>$ git push heroku master</code></pre>
     </section>
 </section>
 <section>
     <section>
-        <h2>The Road to Production is One Way</h2>
-        <h3 class="inverted">Code / Deploy Correlation</h3>
+        <h2>Practice: Micro Apps</h2>
+        <br/>
+        <h3 class="inverted">Barrier: Monolithic Apps</h3>
+        <h3 class="inverted"><blockquote>Does app startup take more than 1 minute?</blockquote></h3>
+        <br/>
+        <ul>
+            <li>Decouple through APIs (HTTP, Pub/Sub, etc)</li>
+            <li>Reduce the barriers to deploying new apps</li>
+        </ul>
+    </section>
+    <section>
+        <h3>Add a JSON Service</h3>
+        <br/>
+        <h4 class="inverted">app/controllers/Applicaiton.java</h4>
+        <pre><code>        public static Result hello() {
+            ObjectNode result = Json.newObject();
+            result.put("message", "hello, world");
+            return ok(result);
+        }</code></pre>
+        <br/>
+        <h4 class="inverted">conf/routes</h4>
+        <pre><code>GET     /hello                      controllers.Application.hello()</code></pre>
+    </section>
+</section>
+<section>
+    <section>
+        <h2>Practice: Checkout, Build, Run</h2>
+        <br/>
+        <h3 class="inverted">Barrier: Creating New Environments is Difficult</h3>
+        <h3 class="inverted"><blockquote>Does getting a new developer setup take more than 15 minutes?</blockquote></h3>
+        <br/>
+        <ul>
+            <li><span style="text-decoration: line-through">It works on my machine.</span></li>
+            <li>Everything needed is defined &amp resolvable via a build tool</li>
+            <li>Environments only differ through configuration</li>
+        </ul>
+    </section>
+    <section>
+        <h3>Staging Environment</h3>
+        <br/>
+        <h4 class="inverted">Create a Staging App</h4>
+        <pre><code>$ git remote rename heroku prod
+$ heroku create
+$ git remote rename heroku staging
+$ git remote -v
+$ git push staging master</code></pre>
+        <br/>
+        <h4 class="inverted">Push a New Feature to Staging</h4>
+        <pre><code>$ git checkout -b newfeature
+$ # make a change
+$ git commit -am "new feature"
+$ git push staging newfeature:master
+        </code></pre>
+    </section>
+</section>
+<section>
+    <section>
+        <h2>Practice: One Way Deployment</h2>
+        <br/>
+        <h3 class="inverted">Barrier: Unknown Source to Deployment Correlation</h3>
+        <h3 class="inverted"><blockquote>Can I SSH in and make a change?</blockquote></h3>
         <br/>
         <ul>
             <li>Production changes requires source changes</li>
             <li>Correlation between code and running systems</li>
-            <li>Branching in git for different environments</li>
-            <li>Litmus Test: <blockquote>Can I SSH in and make a change?</blockquote></li>
         </ul>
     </section>
     <section>
-        <h2>Heroku Releases</h2>
+        <h3>Heroku Releases</h3>
         <br/>
         <pre><code>$ # make a change
 $ git commit -am "a change"
-$ git push heroku master</code></pre>
+$ git push prod master</code></pre>
         <br/>
         <pre><code>$ heroku releases
 $ git log
 $ heroku rollback</code></pre>
     </section>
-    <section>
-        <h2>Staging Environments</h2>
-        <br/>
-        <pre><code>$ git checkout -b newfeature
-$ # make a change
-$ git commit -am "new feature"
-$ git remote rename heroku prod
-$ heroku create
-$ git remote rename heroku staging
-$ git remote -v
-$ git push staging newfeature:master</code></pre>
-    </section>
 </section>
 <section>
     <section>
-        <h2>The Environment Provides the Config</h2>
-        <h3 class="inverted">Zero Intervention On Deploy</h3>
+        <h2>Practice: Zero Intervention Deployment</h2>
+        <br/>
+        <h3 class="inverted">Barrier: Complicated Deployment Procedures</h3>
+        <h3 class="inverted"><blockquote>Are there any credentials stored in the source repo?</blockquote></h3>
         <ul>
             <li>Each environment owns their config</li>
-            <li>Litmus Test: <blockquote>Are there any credentials stored in the source repo?</blockquote></li>
+            <li>External Resources own their config</li>
         </ul>
     </section>
     <section>
-        <h2>Heroku Config</h2>
+        <h3>Heroku Config</h3>
         <br/>
         <pre><code>$ heroku config:add FOO=bar
 $ heroku config
 $ # use System.getenv("FOO")
 $ git commit -am "add FOO use"
-$ git push prod master</code></pre>
+$ git push heroku master</code></pre>
     </section>
     <section>
-        <h2>External Resources Own Their Config</h2>
+        <h3>External Resources Own Their Config</h3>
         <br/>
-        <pre><code>$ heroku addons:add heroku-postgresql:dev
-$ heroku pg:promote HEROKU_POSTGRESQL_BROWN
+        <pre><code>$ heroku config
+$ heroku pg:reset *** TODO ***
 $ heroku config</code></pre>
     </section>
 </section>
 <section>
     <section>
-        <h2>Schema Migrations</h2>
-        <h3 class="inverted">Manage Schema Changes like Code Changes</h3>
+        <h2>Practice: Isolated Schema Changes</h2>
+        <br/>
+        <h3 class="inverted">Barrier: Combined Schema and Codes Changes</h3>
+        <h3 class="inverted"><blockquote>Do schema changes and code changes happen at the same time?</blockquote></h3>
         <br/>
         <ul>
             <li>Versioned, Roll-Backable, etc</li>
-            <li>2 Phase Migrations: First DB then Code</li>
-            <li>Litmus Test: <blockquote>Do schema changes and code changes happen at the same time?</blockquote></li>
+            <li>Long running schema changes don't impact runtime</li>
+            <li>Minimum Two Phase Migrations: First DB then Code</li>
         </ul>
     </section>
     <section>
-        <ul>
-            <li>Add Dependency:<pre><code>"postgresql" % "postgresql" % "9.1-901-1.jdbc4"</code></pre></li>
-            <li>Update conf/application.conf:<pre><code>db.default.driver=org.postgresql.Driver
+        <h3 class="inverted">Setup Database</h3>
+        <h4 class="inverted">project/Build.scala</h4>
+        <pre><code>"postgresql" % "postgresql" % "9.1-901-1.jdbc4"</code></pre>
+        <br/>
+        <h4 class="inverted">conf/application.conf</h4>
+        <pre><code>db.default.driver=org.postgresql.Driver
 db.default.url=${?DATABASE_URL}
 ebean.default="models.*"
-applyEvolutions.default=true</code></pre></li>
-            <li>Create local Postgres Database:<pre><code>$ sudo -u postgres createuser -P f
+applyEvolutions.default=true</code></pre>
+        <br/>
+        <h4 class="inverted">Create local Postgres Database</h4>
+        <pre><code>$ sudo -u postgres createuser -P f
 $ createdb -U f -W -h localhost f
-$ export DATABASE_URL=postgres://f:f@localhost/f</code></pre></li>
-            <li>Create Model</li>
-            <li>Load App</li>
-            <li>Deploy App</li>
-        </ul>
+$ export DATABASE_URL=postgres://f:f@localhost/f</code></pre>
     </section>
     <section>
-        <ul>
-            <li>Turn off auto-schema generation</li>
-            <li>Make schema change: <pre><code># --- !Ups
+        <h3 class="inverted">Create and Apply Schema Changes</h3>
+        <h4 class="inverted">conf/evolutions/default/1.sql</h4>
+        <pre><code># --- !Ups
+create table bar (
+    id                        varchar(255) not null,
+    name                      varchar(255),
+    constraint pk_bar primary key (id));
+create sequence bar_seq;
+
+# --- !Downs
+drop table if exists bar cascade;
+drop sequence if exists bar_seq;</code></pre>
+        <br/>
+        <h4 class="inverted">Apply Schema Changes Locally and Test</h4>
+<pre><code>$ psql -U f -W -h localhost f</code></pre>
+        <br/>
+        <h4 class="inverted">Apply Schema Changes on Heroku and Test</h4>
+        <pre><code>$ git add conf/evolutions/default/1.sql
+$ git commit -am "add schema v1"
+$ git push prod master
+$ heroku pg:sql *** TODO ***</code></pre>
+    </section>
+    <section>
+        <h3 class="inverted">Use the New Schema</h3>
+        <h4 class="inverted">app/models/Bar.java</h4>
+        <pre><code>package models;
+
+import play.db.ebean.Model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Bar extends Model {
+
+    @Id
+    public String id;
+
+    public String name;
+
+}</code></pre>
+        <br/>
+        <h4 class="inverted">Test then Deploy</h4>
+        <pre><code>$ git commit -am "add Bar entity"
+$ git push prod master</code></pre>
+    </section>
+    <section>
+        <h3 class="inverted">Add a Column</h3>
+        <h4 class="inverted">Update the Schema (conf/evolutions/default/2.sql)</h4>
+        <pre><code># --- !Ups
 alter table bar add column rating integer;
 
 # --- !Downs
-alter table bar delete column rating;</code></pre></li>
-            <li>Deploy &amp; Run</li>
-            <li>Update Bar.java: <pre><code>public Integer rating;</code></pre></li>
-            <li>Deploy &amp; Run</li>
-        </ul>
+alter table bar delete column rating;</code></pre>
+        <br/>
+        <h4 class="inverted">Test then Deploy</h4>
+        <br/>
+        <h4 class="inverted">Update the Code (app/models/Bar.java)</h4>
+        <pre><code>public Integer rating;</code></pre>
+        <br/>
+        <h4 class="inverted">Test then Deploy</h4>
     </section>
 </section>
 <section>
     <section>
-        <h2>Ephemeral Web Tier</h2>
-        <h3 class="inverted">Instant Scalability &amp; Deployment</h3>
+        <h2>Practice: Ephemeral App Tier</h2>
+        <br/>
+        <h3 class="inverted">Barrier: State in the App</h3>
+        <h3 class="inverted"><blockquote style="width: 100%">Does a <a href="http://techblog.netflix.com/2011/07/netflix-simian-army.html">Chaos Monkey</a> cause chaos?</blockquote></h3>
         <br/>
         <ul>
             <li>Local disk and memory are not persistent stores</li>
             <li>Server affinity prevents Continuous Delivery</li>
             <li>All persistent state is external to the app tier</li>
-            <li>Litmus Test: <blockquote>Does a <a href="http://techblog.netflix.com/2011/07/netflix-simian-army.html">Chaos Monkey</a> cause chaos?</blockquote></li>
         </ul>
     </section>
     <section>
-        <h2>Scaling on Heroku</h2>
+        <h3 class="inverted">Scaling on Heroku</h3>
         <br/>
         <pre><code>$ heroku scale web=50
 $ heroku ps</code></pre>
     </section>
     <section>
-        <h2>Stateless Web Tier</h2>
+        <h3 class="inverted">Stateless Web Tier</h3>
         <br/>
         <ul>
             <li>Add Session to App</li>
@@ -281,20 +396,21 @@ $ heroku ps</code></pre>
         </ul>
     </section>
     <section>
-        <h2>Zero-Error Change-Over</h2>
+        <h3 class="inverted">Zero-Error Change-Over</h3>
         <img src="assets/cd_heroku.png" style="width: 100%">
     </section>
 </section>
 <section>
     <section>
-        <h2>Logging</h2>
-        <h3 class="inverted">Logs as Streams</h3>
+        <h2>Practice: Logs as Streams</h2>
+        <br/>
+        <h3 class="inverted">Barrier: Decentralized Logging</h3>
+        <h3 class="inverted"><blockquote style="width: 100%">Are logs written to local disk?</blockquote></h3>
         <br/>
         <ul>
             <li>Externalize &amp; Centralize Logging</li>
             <li>One place to search</li>
             <li>Log rotation and disk filling are barriers</li>
-            <li>Litmus Test: <blockquote>Are logs written to local disk?</blockquote></li>
         </ul>
     </section>
     <section>
@@ -309,14 +425,15 @@ $ heroku ps</code></pre>
 </section>
 <section>
     <section>
-        <h2>Monitoring</h2>
-        <h3 class="inverted">Know When Things Break</h3>
+        <h2>Practice: Monitor &amp; Notify</h2>
+        <br/>
+        <h3 class="inverted">Barrier: Reactive Feedback Loop</h3>
+        <h3 class="inverted"><blockquote style="width: 100%">Do your users know before you when something goes wrong?</blockquote></h3>
         <br/>
         <ul>
             <li>Service Checks</li>
             <li>Log Monitoring</li>
             <li>Performance Monitoring</li>
-            <li>Litmus Test: <blockquote>Do your users know before you when something goes wrong?</blockquote></li>
         </ul>
     </section>
     <section>
@@ -340,16 +457,6 @@ $ heroku addons:open papertrail</code></pre>
         <pre><code>$ heroku addons:add newrelic
 $ heroku addons:open newrelic</code></pre>
     </section>
-</section>
-<section>
-    <h2>Continuous Integration &amp; Delivery</h2>
-    <h3 class="inverted">Better Quality</h3>
-    <br/>
-    <ul>
-        <li>Require testing between push and deploy</li>
-        <li>Automatic deploy when tests are successful</li>
-        <li>Litmus Test: <blockquote>Is manual intervention required to test and deploy?</blockquote></li>
-    </ul>
 </section>
 <section>
     <h2>Further Learning</h2>
