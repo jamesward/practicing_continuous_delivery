@@ -77,8 +77,8 @@
         <h3 class="inverted">Adjustable Process</h3>
         <br/>
         <ul>
-            <li>Least involved: Deploy direct to production</li>
-            <li>Most involved: Check into SCM, run CI, user acceptance tests, then deploy to staging</li>
+            <li>Easy: Deploy direct to production</li>
+            <li>Safe: Check into SCM, run CI / tests; then deploy</li>
         </ul>
     </section>
     <section>
@@ -92,6 +92,17 @@
             <li>21 teams</li>
         </ul>
     </section>
+</section>
+<section>
+    <h2>Variety of Technology Options</h2>
+    <br/>
+    <h3 class="inverted">The examples here use:</h3>
+    <ul>
+        <li>Play Framework with Java</li>
+        <li>Git</li>
+        <li>Heroku</li>
+        <li>PostgreSQL</li>
+    </ul>
 </section>
 <section>
     <section>
@@ -127,6 +138,14 @@
     </section>
 </section>
 <section>
+    <h2>Git- Distributed SCM</h2>
+    <br/>
+    <h3 class="inverted">Create a Git Repo:</h3>
+    <pre><code>$ git init
+$ git add .
+$ git commit -m init</code></pre>
+</section>
+<section>
     <section>
         <h1>Heroku</h1>
         <h3 class="inverted">Cloud Application Platform</h3>
@@ -149,16 +168,16 @@
     <section>
         <h2>Deploying on Heroku</h2>
         <br/>
-        <h3 class="inverted">Git Repo</h3>
-        <pre><code>$ git init
-$ git add .
-$ git commit -m init</code></pre>
-        <br/>
         <h3 class="inverted">Provision an App</h3>
         <pre><code>$ heroku create</code></pre>
         <br/>
         <h3 class="inverted">Deploy</h3>
         <pre><code>$ git push heroku master</code></pre>
+        <br/>
+        <h3 class="inverted">Make a Change & Deploy</h3>
+        <pre><code>$ # make change
+$ git commit -am "change"
+$ git push heroku master</code></pre>
     </section>
 </section>
 <section>
@@ -185,6 +204,10 @@ $ git commit -m init</code></pre>
         <br/>
         <h4 class="inverted">conf/routes</h4>
         <pre><code>GET     /hello                      controllers.Application.hello()</code></pre>
+        <br/>
+        <h3 class="inverted">Deploy</h3>
+        <pre><code>$ git commit -am "Add JSON Service"
+$ git push heroku master</code></pre>
     </section>
 </section>
 <section>
@@ -196,7 +219,7 @@ $ git commit -m init</code></pre>
         <br/>
         <ul>
             <li><span style="text-decoration: line-through">It works on my machine.</span></li>
-            <li>Everything needed is defined &amp resolvable via a build tool</li>
+            <li>Everything needed is defined &amp; resolvable via a build tool</li>
             <li>Environments only differ through configuration</li>
         </ul>
     </section>
@@ -205,10 +228,7 @@ $ git commit -m init</code></pre>
         <br/>
         <h4 class="inverted">Create a Staging App</h4>
         <pre><code>$ git remote rename heroku prod
-$ heroku create
-$ git remote rename heroku staging
-$ git remote -v
-$ git push staging master</code></pre>
+$ heroku create -r staging</code></pre>
         <br/>
         <h4 class="inverted">Push a New Feature to Staging</h4>
         <pre><code>$ git checkout -b newfeature
