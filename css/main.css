@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /**
  * Main styles for reveal.js 
  *
@@ -11,7 +12,7 @@
 
 @font-face {
 	font-family: 'League Gothic';
-	src: url('../assets/fonts/leaguegothic/league_gothic-webfont.ttf') format('truetype');
+	src: url('../lib/font/league_gothic-webfont.ttf') format('truetype');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -196,7 +197,7 @@ body {
 	margin: 10px auto;
 
 	text-align: left;
-	font-size: 14px;
+	font-size: 20px;
 	font-family: monospace;
 	line-height: 1.2em;
 
@@ -219,9 +220,20 @@ body {
  	 text-shadow: rgb(255,255,255) 1px 1px 2px;
 }
 
+.reveal sup { 
+	vertical-align: super;
+}
+.reveal sub { 
+	vertical-align: sub;
+}
+
 .reveal small {
 	font-size: 60%;
 	line-height: 1em;
+	vertical-align: top;
+}
+
+.reveal small * {
 	vertical-align: top;
 }
 
@@ -239,16 +251,16 @@ body {
 	color: hsl(185, 85%, 50%);
 	text-decoration: none;
 
-	-webkit-transition: all .2s ease;
-	   -moz-transition: all .2s ease;
-	    -ms-transition: all .2s ease;
-	     -o-transition: all .2s ease;
-	        transition: all .2s ease;
+	-webkit-transition: color .15s ease;
+	   -moz-transition: color .15s ease;
+	    -ms-transition: color .15s ease;
+	     -o-transition: color .15s ease;
+	        transition: color .15s ease;
 }
 	
 	.reveal a:not(.image):hover {
 		color: hsl(185, 85%, 70%);
-		background: hsla(185, 25%, 20%, 0.4);
+		
 		text-shadow: none;
 		border: none;
 		border-radius: 2px;
@@ -848,19 +860,61 @@ body {
  * NEON THEME
  *********************************************/
 
-.reveal.neon a,
-.reveal.neon a:hover,
-.reveal.neon .controls a.enabled {
+.theme-neon .reveal a,
+.theme-neon .reveal a:hover,
+.theme-neon .reveal .controls a.enabled {
 	color: #5de048;
 }
 
-.reveal.neon .progress span,
-.reveal.neon .roll span:after {
+.theme-neon .reveal .progress span,
+.theme-neon .reveal .roll span:after {
 	background: #5de048;
 }
 
-.reveal.neon a.image:hover img {
+.theme-neon .reveal a.image:hover img {
 	border-color: #5de048;
+}
+
+
+/*********************************************
+ * BEIGE THEME
+ *********************************************/
+
+.theme-beige body {
+	color: #333;
+
+	background: #f7f3de;
+	background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%, rgba(247,242,211,1) 100%);
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(247,242,211,1)));
+	background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(247,242,211,1) 100%);
+	background: -o-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(247,242,211,1) 100%);
+	background: -ms-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(247,242,211,1) 100%);
+	background: radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(247,242,211,1) 100%);
+}
+
+.theme-beige .reveal h1,
+.theme-beige .reveal h2,
+.theme-beige .reveal h3,
+.theme-beige .reveal h4,
+.theme-beige .reveal h5,
+.theme-beige .reveal h6 {
+	color: #333;
+	text-shadow: none;
+}
+
+.theme-beige .reveal a,
+.theme-beige .reveal a:hover,
+.theme-beige .reveal .controls a.enabled {
+	color: #8b743d;
+}
+
+.theme-beige .reveal .progress span,
+.theme-beige .reveal .roll span:after {
+	background: #8b743d;
+}
+
+.theme-beige .reveal a.image:hover img {
+	border-color: #8b743d;
 }
 
 
@@ -951,6 +1005,10 @@ body {
 	background: rgba( 0, 0, 0, 0.6 );
 }
 
+/*********************************************
+ * SPEAKER NOTES
+ *********************************************/
 
-
-
+.reveal aside.notes {
+	display: none;
+}

@@ -16,16 +16,38 @@ var Reveal = (function(){
 		indexh = 0,
 		indexv = 0,
 
-		// Configurations options, can be overridden at initialization time 
+		// Configurations defaults, can be overridden at initialization time 
 		config = {
-			controls: false,
-			progress: false,
+			// Display controls in the bottom right corner
+			controls: true,
+
+			// Display a presentation progress bar
+			progress: true,
+
+			// Push each slide change to the browser history
 			history: false,
+
+			// Enable keyboard shortcuts for navigation
+			keyboard: true,
+
+			// Loop the presentation
 			loop: false,
+
+			// Number of milliseconds between automatically proceeding to the 
+			// next slide, disabled when set to 0
+			autoSlide: 0,
+
+			// Enable slide navigation via mouse wheel
 			mouseWheel: true,
+
+			// Apply a 3D roll to links on hover
 			rollingLinks: true,
-			transition: 'default',
-			theme: 'default'
+
+			// UI style
+			theme: 'default', // default/neon/beige
+
+			// Transition style
+			transition: 'default' // default/cube/page/concave/linear(2d)
 		},
 
 		// Slides may hold a data-state attribute which we pick up and apply 
@@ -54,6 +76,9 @@ var Reveal = (function(){
 		
 		// Throttles mouse wheel navigation
 		mouseWheelTimeout = 0,
+
+		// An interval used to automatically move on to the next slide
+		autoSlideTimeout = 0,
 
 		// Delays updates to the URL due to a Chrome thumbnailer bug
 		writeURLTimeout = 0,
@@ -107,6 +132,9 @@ var Reveal = (function(){
 		// Read the initial hash
 		readURL();
 
+		// Start auto-sliding if it's enabled
+		cueAutoSlide();
+
 		// Set up hiding of the browser address bar
 		if( navigator.userAgent.match( /(iphone|ipod|android)/i ) ) {
 			// Give the page some scrollable overflow
@@ -121,8 +149,8 @@ var Reveal = (function(){
 	}
 
 	function configure() {
-		// Fall back on the 2D transform theme 'linear'
 		if( supports3DTransforms === false ) {
+			// Fall back on the 2D transform theme 'linear'
 			config.transition = 'linear';
 		}
 
@@ -130,7 +158,7 @@ var Reveal = (function(){
 			dom.controls.style.display = 'block';
 		}
 
-		if( config.progress ) {
+		if( config.progress && dom.progress ) {
 			dom.progress.style.display = 'block';
 		}
 
@@ -139,7 +167,7 @@ var Reveal = (function(){
 		}
 
 		if( config.theme !== 'default' ) {
-			dom.wrapper.classList.add( config.theme );
+			document.documentElement.classList.add( 'theme-' + config.theme );
 		}
 
 		if( config.mouseWheel ) {
@@ -154,11 +182,14 @@ var Reveal = (function(){
 	}
 
 	function addEventListeners() {
-		document.addEventListener( 'keydown', onDocumentKeyDown, false );
 		document.addEventListener( 'touchstart', onDocumentTouchStart, false );
 		document.addEventListener( 'touchmove', onDocumentTouchMove, false );
 		document.addEventListener( 'touchend', onDocumentTouchEnd, false );
 		window.addEventListener( 'hashchange', onWindowHashChange, false );
+
+		if( config.keyboard ) {
+			document.addEventListener( 'keydown', onDocumentKeyDown, false );
+		}
 
 		if ( config.controls && dom.controls ) {
 			dom.controlsLeft.addEventListener( 'click', preventAndForward( navigateLeft ), false );
@@ -269,19 +300,20 @@ var Reveal = (function(){
 			case 13: if( overviewIsActive() ) { deactivateOverview(); triggered = true; } break;
 		}
 
+		// If the input resulted in a triggered action we should prevent 
+		// the browsers default behavior
 		if( triggered ) {
 			event.preventDefault();
 		}
 		else if ( event.keyCode === 27 && supports3DTransforms ) {
-			if( overviewIsActive() ) {
-				deactivateOverview();
-			}
-			else {
-				activateOverview();
-			}
+			toggleOverview();
 	
 			event.preventDefault();
 		}
+
+		// If auto-sliding is enabled we need to cue up 
+		// another timeout
+		cueAutoSlide();
 
 	}
 
@@ -654,7 +686,7 @@ var Reveal = (function(){
 		}
 
 		// Update progress if enabled
-		if( config.progress ) {
+		if( config.progress && dom.progress ) {
 			dom.progressbar.style.width = ( indexh / ( document.querySelectorAll( HORIZONTAL_SLIDES_SELECTOR ).length - 1 ) ) * window.innerWidth + 'px';
 		}
 
@@ -739,12 +771,12 @@ var Reveal = (function(){
 	function readURL() {
 		// Break the hash down to separate components
 		var bits = window.location.hash.slice(2).split('/');
-		
+
 		// Read the index components of the hash
-		indexh = parseInt( bits[0] ) || 0 ;
-		indexv = parseInt( bits[1] ) || 0 ;
-		
-		navigateTo( indexh, indexv );
+		var h = parseInt( bits[0] ) || 0 ;
+		var v = parseInt( bits[1] ) || 0 ;
+
+		navigateTo( h, v );
 	}
 	
 	/**
@@ -822,7 +854,7 @@ var Reveal = (function(){
 				verticalFragments[ verticalFragments.length - 1 ].classList.remove( 'visible' );
 
 				// Notify subscribers of the change
-				dispatchEvent( 'fragmenthidden', { fragment: verticalFragments[0] } );
+				dispatchEvent( 'fragmenthidden', { fragment: verticalFragments[ verticalFragments.length - 1 ] } );
 				return true;
 			}
 		}
@@ -833,12 +865,21 @@ var Reveal = (function(){
 				horizontalFragments[ horizontalFragments.length - 1 ].classList.remove( 'visible' );
 
 				// Notify subscribers of the change
-				dispatchEvent( 'fragmenthidden', { fragment: horizontalFragments[0] } );
+				dispatchEvent( 'fragmenthidden', { fragment: horizontalFragments[ horizontalFragments.length - 1 ] } );
 				return true;
 			}
 		}
 		
 		return false;
+	}
+
+	function cueAutoSlide() {
+		clearTimeout( autoSlideTimeout );
+
+		// Cue the next auto-slide if enabled
+		if( config.autoSlide ) {
+			autoSlideTimeout = setTimeout( navigateNext, config.autoSlide );
+		}
 	}
 	
 	/**
@@ -909,6 +950,10 @@ var Reveal = (function(){
 		if( nextFragment() === false ) {
 			availableRoutes().down ? navigateDown() : navigateRight();
 		}
+
+		// If auto-sliding is enabled we need to cue up 
+		// another timeout
+		cueAutoSlide();
 	}
 
 	/**

@@ -8,6 +8,7 @@
 
     <meta name="description" content="">
     <meta name="author" content="James Ward">
+    <meta name="author" content="James Ward">
 
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -18,20 +19,9 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/print.css" type="text/css" media="print">
 
-    <link rel="stylesheet" href="lib/zenburn.css">
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
     <style>
-        .column2 {
-            column-width: 300px;
-            -webkit-column-width: 300px;
-            -moz-column-width: 300px;
-            column-count: 2;
-            -webkit-column-count: 2;
-            -moz-column-count: 2;
-            column-gap: 50px;
-            -webkit-column-gap: 50px;
-            -moz-column-gap: 50px;
-        }
-        
         .comparison {
             position: absolute;
         }
@@ -40,6 +30,29 @@
             position: absolute;
             top: 0;
             opacity: 0;
+        }
+
+        .reveal .controls {
+            bottom: auto;
+            top: 0px;
+        }
+        
+        
+        .boxed {
+            background-color: #999999;
+            border-color: #aaaaaa;
+            border-style: solid;
+            border-radius: 5px;
+            border-width: 2px;
+            padding: 5px;
+        }
+        
+        .boxed h3 {
+            margin-bottom: 0px;
+        }
+
+        .boxed h4 {
+            margin-bottom: 0px;
         }
     </style>
 </head>
@@ -51,11 +64,19 @@
 <!-- Used to fade in a background when a specific slide state is reached -->
 <div class="state-background"></div>
 
+<aside style="display: block; position: fixed; bottom: 5px; left: 10px;">
+    <a href="http://heroku.com"><img src="assets/heroku-logo-light-88x31.png"></a>
+</aside>
+
+<aside style="display: block; position: fixed; bottom: 10px; right: 10px;">
+    <a href="http://twitter.com/_JamesWard"  style="font-size: 20px;">@_JamesWard</a>
+</aside>
+
 <!-- Any section element inside of this container is displayed as a slide -->
 <div class="slides">
 <section>
     <h1>Practicing Continuous Delivery</h1>
-    <h3 class="inverted"><a href="http://twitter.com/_JamesWard">@_JamesWard</a></h3>
+    <h3 class="inverted">James Ward</h3>
     <script>
         // Delicously hacky. Look away.
         if( navigator.userAgent.match( /(iPhone|iPad|iPod|Android)/i ) ) document.write( '<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>' );
@@ -79,16 +100,96 @@
 <section>
     <section>
         <h2>Continuous Delivery</h2>
-        <a href="http://en.wikipedia.org/wiki/Continuous_delivery"><img src="assets/Continuous_Delivery_process_diagram.png"></a><br/>
-        <h3>Goals: Deliver Faster &amp; Reduce Risk</h3>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+            google.load("visualization", "1", {packages:["corechart"]});
+            google.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['', 'Traditional Delivery', 'Continuous Delivery'],
+                    ['',  0, 0],
+                    ['',  0, 0],
+                    ['',  0, 3],
+                    ['',  0, 2],
+                    ['',  0, 1],
+                    ['',  10, 0],
+                    ['',  8, 0],
+                    ['',  6, 3],
+                    ['',  4, 2],
+                    ['',  2, 1],
+                    ['',  0, 0],
+                    ['',  0, 0],
+                    ['',  0, 3],
+                    ['',  0, 2],
+                    ['',  0, 1],
+                    ['',  0, 0],
+                    ['',  0, 0],
+                    ['',  0, 3],
+                    ['',  0, 2],
+                    ['',  0, 1],
+                    ['',  10, 0],
+                    ['',  8, 0],
+                    ['',  6, 3],
+                    ['',  4, 2],
+                    ['',  2, 1],
+                    ['',  0, 0],
+                    ['',  0, 0],
+                    ['',  0, 3],
+                    ['',  0, 2],
+                    ['',  0, 1],
+                    ['',  0, 0],
+                    ['',  0, 0]
+                ]);
+
+                var options = {
+                    hAxis: {title: 'Time', textPosition: 'none'},
+                    vAxis: {title: 'Risk', textPosition: 'none'},
+                    tooltip: {trigger: 'none'},
+                    legend: {position: 'top', alignment: 'center'}
+                };
+
+                var chart = new google.visualization.AreaChart(document.getElementById('cd-chart'));
+                chart.draw(data, options);
+            }
+        </script>
+        <div id="cd-chart" style="width: 900px; height: 400px; margin-bottom: 15px;"></div>
+        <h3 class="inverted">Goals: Deliver Faster &amp; Reduce Risk</h3>
     </section>
     <section>
-        <h3 class="inverted">Adjustable Process</h3>
+        <h3 class="inverted">Variable Deployment Process</h3>
         <br/>
-        <ul>
-            <li>Easy: Deploy direct to production</li>
-            <li>Safe: Check into SCM, run CI / tests; then deploy</li>
-        </ul>
+        <div class="boxed" style="position: absolute; left: 10px; top: 300px;">
+            <h4>App</h4>
+        </div>
+        <div class="boxed" style="position: absolute; right: 10px; top: 300px;">
+            <h4>Deploy to Prod</h4>
+        </div>
+        
+        <div class="boxed" style="position: absolute; top: 300px; left: 80px; right: 198px; background-color: #555555;">
+            <h4>&rarr; &rarr; &rarr; &rarr; &rarr; &rarr; &rarr; &rarr; &rarr; &rarr; &rarr; &rarr; &rarr; &rarr; &rarr; &rarr; &rarr;</h4>
+        </div>
+
+        <div class="fragment boxed" style="position: absolute; top: 295px; left: 90px; padding-top: 10px; padding-bottom: 10px; background-color: #668888;">
+            <h4>Build</h4>
+        </div>
+
+        <div class="fragment boxed dark" style="position: absolute; top: 295px; left: 175px; padding-top: 10px; padding-bottom: 10px; background-color: #886666;">
+            <h4>Auto-Test</h4>
+        </div>
+
+        <div class="fragment boxed dark" style="position: absolute; top: 295px; left: 305px; padding-top: 10px; padding-bottom: 10px; background-color: #668866;">
+            <h4>Deploy to Staging</h4>
+        </div>
+
+        <div class="fragment boxed dark" style="position: absolute; top: 295px; left: 525px; padding-top: 10px; padding-bottom: 10px; background-color: #666688;">
+            <h4>Manual Test</h4>
+        </div>
+        <!--
+        1. Push, Deploy to Prod
+        2. Push, Build, Deploy to Prod
+        3. Push, Build, Run Automated Tests, Deploy to Prod
+        4. Push, Build, Run Automated Tests, Deploy to Staging, Manual Tests, Promote to Prod
+        -->
     </section>
     <section>
         <h3 class="inverted">Continuous Delivery at Heroku</h3>
@@ -171,19 +272,19 @@ $ git commit -m init</code></pre>
         <h3>1,871,268+ Apps Running on Heroku</h3>
     </section>
     <section>
-        <h2>Heroku Terminology</h2>
-        <img src="assets/heroku_terms.png" style="width: 100%">
+        <h3 class="inverted">Heroku Terminology</h3>
+        <img src="assets/heroku_terms.png" style="height: 450px;">
     </section>
     <section>
-        <h2>Deploying on Heroku</h2>
+        <h3 class="inverted">Deploying on Heroku</h3>
         <br/>
-        <h3 class="inverted">Provision an App</h3>
+        <h4 class="inverted">Provision an App</h4>
         <pre><code>$ heroku create</code></pre>
         <br/>
-        <h3 class="inverted">Deploy</h3>
+        <h4 class="inverted">Deploy</h4>
         <pre><code>$ git push heroku master</code></pre>
         <br/>
-        <h3 class="inverted">Make a Change & Deploy</h3>
+        <h4 class="inverted">Make a Change & Deploy</h4>
         <pre><code>$ # make change
 $ git commit -am "change"
 $ git push heroku master</code></pre>
@@ -204,19 +305,18 @@ $ git push heroku master</code></pre>
         </ul>
     </section>
     <section>
-        <h3>Add a JSON Service</h3>
-        <br/>
+        <h3 class="inverted">Add a JSON Service</h3>
         <h4 class="inverted">app/controllers/Applicaiton.java</h4>
-        <pre><code>        public static Result hello() {
-            ObjectNode result = Json.newObject();
-            result.put("message", "hello, world");
-            return ok(result);
-        }</code></pre>
+        <pre><code>public static Result hello() {
+    ObjectNode result = Json.newObject();
+    result.put("message", "hello, world");
+    return ok(result);
+}</code></pre>
         <br/>
         <h4 class="inverted">conf/routes</h4>
-        <pre><code>GET     /hello                      controllers.Application.hello()</code></pre>
+        <pre><code>GET     /hello                    controllers.Application.hello()</code></pre>
         <br/>
-        <h3 class="inverted">Deploy</h3>
+        <h4 class="inverted">Deploy</h4>
         <pre><code>$ git commit -am "Add JSON Service"
 $ git push heroku master</code></pre>
         <!-- todo: consume json service in another app -->
@@ -332,7 +432,7 @@ $ createdb -U f -W -h localhost f
 $ export DATABASE_URL=postgres://f:f@localhost/f</code></pre>
     </section>
     <section>
-        <h3 class="inverted">Create and Apply Schema Changes</h3>
+        <h3 class="inverted">Create Schema</h3>
         <h4 class="inverted">conf/evolutions/default/1.sql</h4>
         <pre><code># --- !Ups
 create table bar (
@@ -344,7 +444,9 @@ create sequence bar_seq;
 # --- !Downs
 drop table if exists bar cascade;
 drop sequence if exists bar_seq;</code></pre>
-        <br/>
+    </section>
+    <section>
+        <h3 class="inverted">Apply Schema Changes</h3>
         <h4 class="inverted">Apply Schema Changes Locally and Test</h4>
 <pre><code>$ psql -U f -W -h localhost f</code></pre>
         <br/>
@@ -360,18 +462,13 @@ $ heroku pg:psql </code></pre><!-- todo: complete psql example -->
         <pre><code>package models;
 
 import play.db.ebean.Model;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
 public class Bar extends Model {
-
-    @Id
-    public String id;
-
+    @Id public String id;
     public String name;
-
 }</code></pre>
         <br/>
         <h4 class="inverted">Test then Deploy</h4>
@@ -426,7 +523,7 @@ $ heroku ps</code></pre>
     </section>
     <section>
         <h3 class="inverted">Zero-Error Change-Over</h3>
-        <img src="assets/cd_heroku.png" style="width: 100%">
+        <img src="assets/cd_heroku.png" style="height: 450px;">
     </section>
 </section>
 <section>
@@ -508,61 +605,57 @@ $ heroku addons:open newrelic</code></pre>
     <a class="down" href="#">&#x25BC;</a>
 </aside>
 
-<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+<!-- Presentation progress bar -->
 <div class="progress"><span></span></div>
 
 </div>
 
-<!-- Optional libraries for code syntax highlighting and classList support in IE9 -->
-<script src="lib/highlight.js"></script>
-<script src="lib/classList.js"></script>
-
-<script src="js/reveal.min.js"></script>
+<script src="lib/js/head.min.js"></script>
 
 <script>
-    // Parse the query string into a key/value object
-    var query = {};
-    location.search.replace( /[A-Z0-9]+?=(\w*)/gi, function(a) {
-        query[ a.split( '=' ).shift() ] = a.split( '=' ).pop();
+    // Load reveal.js as well as a classList polyfill if needed
+    head.js( !document.body.classList ? 'lib/js/classList.js' : null )
+            .js( 'js/reveal.js', function() {
+
+                // Parse the query string into a key/value object
+                var query = {};
+                location.search.replace( /[A-Z0-9]+?=(\w*)/gi, function(a) {
+                    query[ a.split( '=' ).shift() ] = a.split( '=' ).pop();
+                } );
+
+                // Fires when a slide with data-state=customevent is activated
+                Reveal.addEventListener( 'customevent', function() {
+                    console.log( '"customevent" has fired' );
+                } );
+
+                // Fires each time a new slide is activated
+                Reveal.addEventListener( 'slidechanged', function( event ) {
+                    // event.previousSlide, event.currentSlide, event.indexh, event.indexv
+                } );
+
+                // Full list of configuration options available here:
+                // https://github.com/hakimel/reveal.js#configuration
+                Reveal.initialize({
+                    controls: true,
+                    progress: true,
+                    history: true,
+                    rollingLinks: false,
+                    theme: query.theme || 'default', // default/neon/beige
+                    transition: query.transition || 'default' // default/cube/page/concave/linear(2d)
+                });
+
+            } );
+
+    // Load highlight.js for syntax highlighting of code samples
+    head.js( 'lib/js/highlight.js', function() {
+        hljs.initHighlightingOnLoad();
     } );
 
-    // Fires when a slide with data-state=customevent is activated
-    Reveal.addEventListener( 'customevent', function() {
-        alert( '"customevent" has fired' );
-    } );
-
-    // Fires each time a new slide is activated
-    Reveal.addEventListener( 'slidechanged', function( event ) {
-        // event.previousSlide, event.currentSlide, event.indexh, event.indexv
-    } );
-
-    Reveal.initialize({
-        // Display controls in the bottom right corner
-        controls: true,
-
-        // Display a presentation progress bar
-        progress: true,
-
-        // If true; each slide will be pushed to the browser history
-        history: true,
-
-        // Loops the presentation, defaults to false
-        loop: false,
-
-        // Flags if mouse wheel navigation should be enabled
-        mouseWheel: true,
-
-        // Apply a 3D roll to links on hover
-        rollingLinks: false,
-
-        // UI style
-        theme: query.theme || 'default', // default/neon
-
-        // Transition style
-        transition: query.transition || 'default' // default/cube/page/concave/linear(2d)
-    });
-
-    hljs.initHighlightingOnLoad();
+    // If we're runnning the notes server we need to include some additional JS
+    // TODO Is there a better way to determine if we're running the notes server?
+    if( window.location.host === 'localhost:1947' ) {
+        head.js( 'socket.io/socket.io.js', 'plugin/speakernotes/client.js' );
+    }
 </script>
 
 </body>
